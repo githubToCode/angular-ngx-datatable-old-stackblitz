@@ -1,0 +1,97 @@
+// for table
+//for Email Grid
+.hide {
+  display: none !important;
+}
+.show {
+  display: block !important;
+}
+.data-table-header {
+  display: flex;
+  padding: 10px 5px;
+  vdl-label{
+    line-height: 1.88em;
+    color:#005a99
+  }
+  vdl-select{
+    width: 148px;
+    padding: 4px;
+    font-size: 12px;
+    border: 1px solid #004677;
+    border-radius: 3px;
+    .vdl-select-value-text {
+      color:#005a99;
+      line-height: 1.58em;
+    }
+  }
+  .groupBy-select {
+    display: inline-block;
+  }
+}
+.data-table-grid{
+    &.minimumsizeView {
+      thead {
+        display: none;
+      }
+    }
+    .data-table{
+        width:100%;
+        .groupRow {
+            cursor: pointer;
+        }
+        .vdl-row-override:hover{
+            cursor: pointer;
+            background-color:#bddaf1;
+        }
+
+        th.vdl-header-cell {
+          text-align: center;
+        }
+        
+        td.vdl-cell:first-child, td.vdl-footer-cell:first-child, th.vdl-header-cell:first-child{
+            padding-left: 10px;
+        }
+        
+        vdl-cell:last-child, vdl-footer-cell:last-child, vdl-header-cell:last-child {
+            padding-right: 10px;
+        }
+       
+        th{
+            position: relative;
+            background-color: #d5d5d5
+          }
+        th, td {
+            //overflow: hidden;
+            //text-overflow: ellipsis;
+            white-space: nowrap;
+            padding:11px 10px 0 10px;
+          }
+          .resizeHandler {
+            display: inline-block;
+            height: 100%;
+            //cursor: col-resize;
+            position: absolute;
+            right: 0;
+            top :1px;
+            padding: 0 3px;
+            z-index: 100;
+        }
+        .resizeHandler .splitter {
+            display: inline-block;
+            width: 1px;
+            height: 100%;
+            background:#bfbdbd;
+        }
+
+        .minViewCol {
+          display: flex;
+          .icon, .date {
+            padding: 0 3px;
+          }
+          .subject {
+            flex-grow: 1;
+          }
+        }
+    }
+
+}

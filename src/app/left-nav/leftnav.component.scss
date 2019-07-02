@@ -1,0 +1,361 @@
+.vdl-accordion {
+  flex-grow: 1;
+  max-height: calc(100% - 42px); // As we discussed this should be part of dynamic style change based on button container height.
+  display: flex;
+  flex-direction: column;
+  .toggle-item-content {
+    display: flex;
+    flex-direction: column;
+    max-height: 45px; // 45px are toggle header height (everywhere you see 45 whic is reference to toggle header height)
+    &.opened {
+      max-height: calc(100% - 45px);
+    }
+    &.allOpened {
+      height: calc(50% + 0px);
+    }
+    .vdl-expansion-panel-header {
+      min-height: 45px;
+    }
+    .vdl-expansion-panel-content {
+      max-height: calc(100% - 45px);
+      overflow: auto;
+    }
+    .vdl-expansion-panel-body {
+      max-height: calc(100% - 30px) !important; // 30px are top and bottom padding of expansion-panel-body (each having 15px)
+    }
+    .accordion-content {
+      max-height: calc(100% - 0px);
+      display: flex;
+      flex-direction: column;
+      .nested-filter-container {
+        height: calc(100% - 74px) !important; // 74px are Filter content top select box consumed space.
+        overflow: auto;
+      }
+    }
+  }
+}
+
+.supervision-review{
+    height:calc(100vh - 60px);
+    supervision-second-sidenav{
+        .vdl-expansion-panel-body{
+            max-height:none !important;
+        }
+        .review-tree-invisible {
+            display: none;
+          }
+
+          .review-filter-tree ul,
+          .review-filter-tree li {
+            margin-top: 0;
+            margin-bottom: 0;
+            list-style-type: none;
+          }
+
+          .vdl-icon{
+            padding-right: 5px;
+            }
+
+    }
+   
+    .as-split-area:first-of-type{
+      overflow :hidden !important;
+      > div {
+          height : 100%;
+          .firstPane {
+            height : 100%;
+            .nested-filter-container{
+              overflow:auto;
+            }
+            }
+        }
+      }
+    supervision-review-body{
+        review-top-tab{
+            // width:40px;
+            background: rgba(189,218,241,.35);
+            font-size:12px;
+        }
+        .vdl-toolbar{
+            padding-top:6px;
+            background:#E8EEF4;
+
+                button{
+                   border:1px solid #0070bd !important;
+                    height:30px;
+                    margin:2px 5px;
+
+            }
+
+        }
+        .review-list-panel{
+
+            border:1px solid #0070bd;
+            margin-bottom:5px;
+        }
+        .review-status-panel{
+
+            height:calc(100vh - 110px);
+        }
+
+
+    }
+    //Start of review summary
+    .review-summary{
+        display:flex;
+        font-size:0.7em;
+        &-left{
+            width:70%;
+            margin-left:10Px;
+
+            card-view{
+                margin-bottom:10px;
+                background-color:#E8EEF4;
+                display:flex;
+                flex-direction:column ;
+                border:1px solid #0070bd;
+                border-radius: 5px;
+                .card-view-header{
+                    padding:8px;
+                    font-size:1.1em;
+                }
+                .card-view-body{
+                    padding:10px;
+                    background-color:white;
+                    border-bottom-left-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                    border: 1px solid white;
+                    ul{
+                        list-style-type: none;
+                        padding-left:10px;
+                        vdl-icon{
+                            color:#0070bd;
+                        }
+                    }
+                }
+            }
+        }
+        &-right{
+            width:25%;
+            margin-left:10px;
+            .right-tip{
+                border:1px solid #0070bd;
+                border-radius: 5px;
+                margin:0;
+                padding:10px;
+            }
+        }
+    }
+    .as-split-area{
+      overflow-y:hidden !important;
+    }
+    // .dynamicheight2{
+    //   .as-split-area{
+    //     overflow-y:auto !important;
+    //   }
+    // }
+    .dynamicheight2 .as-split-area{
+    
+      overflow :hidden !important;
+        > div {
+          height : 100%;
+          .firstPane {
+            height : 100%;
+            review-email-grid{
+              display: flex;
+              height: 100%;
+              flex-direction: column;
+              flex-wrap: nowrap;
+              justify-content: flex-start;
+              .review-email-grid{
+                height: calc(100% - 62px);
+                vdl-panel{
+                  height: calc(100% - 56px);
+                  }
+              }
+            }
+        }
+        .secondPane{
+          height:100%;
+          .review-status-panel{
+            height:100%;
+            overflow:auto;
+          }
+        }
+      
+    }
+    }
+
+
+}
+
+
+.customViewList{
+    border: 1px solid colors('brandblue');
+    margin-left:60px;
+
+  }
+  .custom-second-viewList{
+   border: 1px solid colors('brandblue');
+    //margin-top:6px;
+        .vdl-menu-content{
+            .vdl-menu-item{
+                background-color:colors('white') !important;
+            }
+            .active{
+                background-color:colors('hover-gray')!important;
+            }
+        }
+
+
+}
+//for Email Grid
+.review-email-header{
+  display: flex;
+  padding: 10px 5px;
+  vdl-label{
+    line-height: 1.88em;
+    color:#005a99
+  }
+  vdl-select{
+    width: 148px;
+    padding: 4px;
+    font-size: 12px;
+    border: 1px solid #004677;
+    border-radius: 3px;
+    .vdl-select-value-text {
+      color:#005a99;
+      line-height: 1.58em;
+    }
+  }
+
+}
+.review-email-grid{
+    .review-email-table{
+        width:100%;
+        table-layout: fixed;
+        .groupRow {
+            cursor: pointer;
+        }
+        .vdl-row-override:hover{
+            cursor: pointer;
+            background-color:#bddaf1;
+        }
+
+        td.vdl-cell:first-child, td.vdl-footer-cell:first-child, th.vdl-header-cell:first-child{
+            padding-left: 10px;
+        }
+
+        vdl-cell:last-child, vdl-footer-cell:last-child, vdl-header-cell:last-child {
+            padding-right: 10px;
+        }
+        th{
+            position: relative;
+            background-color: #d5d5d5
+          }
+        th.vdl-sort-header-disabled {
+            .vdl-sort-header-arrow {
+              display:none;
+            }
+          }
+        th, td {
+            //overflow: hidden;
+            //text-overflow: ellipsis;
+            white-space: nowrap;
+            padding:11px 10px 0 10px;
+          }
+          .resizeHandler {
+            display: inline-block;
+            height: 100%;
+            //cursor: col-resize;
+            position: absolute;
+            right: 0;
+            top :1px;
+            padding: 0 3px;
+            z-index: 100;
+        }
+        .resizeHandler .splitter {
+            display: inline-block;
+            width: 1px;
+            height: 100%;
+            background:#bfbdbd;
+        }
+    }
+
+}
+
+//for Preset modal
+.reviewpresetmodal{
+  .vdl-form-field-invalid .vdl-form-field-underline {
+    background-color: colors('input-default');
+  }
+  .vdl-focused .vdl-form-field-underline {
+    background-color: colors('brandblue');
+  }
+  .csc-is-invalid{
+    .vdl-form-field-underline {
+      background-color: colors('csc-invalid');
+    }
+
+  }
+  .preset-error{
+    font-size: .625rem;
+    line-height: .6875rem;
+    color: colors('csc-invalid');
+    position:relative;
+    top:-7px;
+  }
+}
+
+.dynamicheight{
+    height:calc(100vh - 60px);
+  }
+  .dynamicheight2{
+    height:calc(100vh - 147px);
+  }
+li{
+  list-style-type:none;
+}
+
+
+@for $i from 0 through 10 {
+   // Width and Height helpers
+    .w#{($i*10)} {
+        width:$i*10% !important;
+    }
+    .mw#{($i*160)} {
+        max-width:($i*160)*1px !important;
+    }
+    .h#{($i*10)} {
+        height:$i*10% !important;
+    }
+    .min-vh#{($i*10)} {
+        min-height:$i*10vh!important;
+    }
+   //for margin helpers use ml<pixel value>
+   .ml#{($i*10)} {
+     margin-left:$i*10px !important;
+   }
+   .mr#{($i*10)} {
+     margin-right:$i*10px !important;
+   }
+   .mt#{($i*10)} {
+     margin-top:$i*10px !important;
+   }
+   .mb#{($i*10)} {
+     margin-bottom:$i*10px !important;
+   }
+  //for padding helpers
+   .pl#{($i*10)} {
+     padding-left:$i*10px !important;
+   }
+   .pr#{($i*10)} {
+     padding-right:$i*10px !important;
+   }
+   .pt#{($i*10)} {
+     padding-top:$i*10px !important;
+   }
+   .pb#{($i*10)} {
+     padding-bottom:$i*10px !important;
+   }
+}

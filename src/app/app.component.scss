@@ -1,0 +1,38 @@
+.as-split-area {
+  leftnav {
+    height: calc(100% - 0px);
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+:host {
+  display: block;
+  height: 100%;
+}
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+:host {
+  display: block;
+  height: 100%;
+}
+.demo-tree-node-invisible {
+  display: none;
+}
+
+.demo-tree-node-nested {
+  padding-left: 40px;
+}
+
+.vdl-nested-tree-node li {
+  list-style: none;
+}

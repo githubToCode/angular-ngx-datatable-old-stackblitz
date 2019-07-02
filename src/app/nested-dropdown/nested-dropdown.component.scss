@@ -1,0 +1,146 @@
+.nested-dropdown-trp-overlay {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  opacity: 0;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 100;
+}
+.nested-dropdown {
+    width: 100%;
+    padding-bottom: 5px;
+    font-size: 12px;
+    //border-bottom: 1px solid #d5d5d5;
+    //border-radius: 3px;
+    position: relative;
+    z-index: 101;
+    .label {
+      font-family: Roboto-Medium,sans-serif;
+      font-size: .875rem;
+      font-weight: 400;
+      color: #4a4a4a;
+    }
+    .selectedValue {
+      //color: #005a99;
+      height: 32px;
+      line-height: 32px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: .875rem;
+      cursor: pointer;
+      display: block;
+      border-bottom: 1px solid #d5d5d5;
+      &:focus {
+        border-color: #0070bd;
+        outline: 0;
+        border-bottom-width: 2px;
+      }
+      .icon {
+        float: right;
+        //color: #005a99;
+        font-weight: bold;
+      }
+    }
+    .dropdown-list {
+        position: fixed;
+        /* background: #f9f9f9; */
+        box-shadow: 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+        background-color: rgba(249, 249, 249, 1);
+        z-index: 2002;
+        animation: growFromCenter .1s;
+    }
+  }
+  ul {
+    margin: 0px;
+    padding: 0px;
+    li {
+      list-style: none;
+      position: relative;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      cursor: pointer;
+      .label {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        line-height: 14px;
+        height: 45px;
+        position: relative;
+        &:hover, &.active {
+          background: #e7e7e7;
+        }
+        &:focus {
+          outline: 0;
+          .bottomBorder {
+            height: 2px;
+            background: #0070bd;
+          }
+        }
+        .bottomBorder {
+          background: #d5d5d5;
+          height: 1px;
+          width: 100%;
+          position: absolute;
+          bottom: 0px;
+          left: 0px
+        }
+        .toggleSwitch {
+          cursor: pointer;
+          font-size: 16px;
+          font-weight: bold;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
+  .vdl-tree-node {
+    margin-left: 0px !important;
+  }
+
+  .vdl-tree-node-toggle {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .vdl-nested-tree-node li ul {
+    padding-left: 0px !important;
+    margin-left: 0px !important;
+  }
+
+@keyframes growFromCenter {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+  
+  $levels: 12;
+  $levelSpacing: 10;
+  
+  %float-styles {
+    float: left;
+  }
+  
+  @mixin level-x-list {
+    @for $i from 1 through $levels {
+        .level-#{$i} {
+          padding-left: #{$i*$levelSpacing}px;
+        }
+    }
+  }
+  
+  @include level-x-list;
+
+  
+   
+
+       
+ 

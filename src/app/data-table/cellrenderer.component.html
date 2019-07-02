@@ -1,0 +1,4 @@
+<span *ngIf="cellTemplate">
+  <ng-container *ngTemplateOutlet="cellTemplate; context: {$implicit: {column: column, row: row}}"></ng-container>
+</span>
+<span *ngIf="!cellTemplate">{{row[column.field]}} S</span>

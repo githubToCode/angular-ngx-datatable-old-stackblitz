@@ -1,0 +1,76 @@
+<div class="data-table-header">
+  <div class="groupBy-select" *ngIf="showGroupBy">
+    <vdl-label class="pr10">Group:</vdl-label>
+    <vdl-select [value]="groupByOptions.selected.viewValue" (selectionChange)="onSelectionChange($event)" style="">
+      <vdl-option *ngFor="let group of groupByOptions.options" [value]="group.viewValue">
+        {{group.viewValue}}
+      </vdl-option>
+    </vdl-select>
+  </div>
+  <div class="expandcollapsebtns" *ngIf="groupByOptions.showGroupToggleButtons">
+    <vdl-icon fontSet="fontawesome" fontIcon="fa fa-comment" aria-hidden="true"> </vdl-icon>
+    <button vdl-secondary-button class="small vdl-tertiary-button ml10" *ngIf="groupByOptions.selected.value != 'none'" (click)="onToggleRowGroups('expand')">
+      <span class="vdl-button-wrapper">Expand All</span>
+    </button>
+    <button vdl-secondary-button class="small vdl-tertiary-button ml10" *ngIf="groupByOptions.selected.value != 'none'" (click)="onToggleRowGroups('collapse')" >
+      <span class="vdl-button-wrapper">Collapse All</span>
+    </button>
+  </div>
+</div>
+<div [class]="isMinimumSizeViewTable ? 'data-table-grid minimumsizeView' : 'data-table-grid'" #dataTableElm>
+  <vdl-panel>
+    <table vdl-table vdlSort [dataSource]="dataTableSource" style="width:100%" class="review-email-table">
+      <ng-container *ngFor="let column of columns; let i = index" [vdlColumnDef]="column.field">
+        <th vdl-header-cell *vdlHeaderCellDef [width]="column.width" vdl-sort-header>
+          <span *ngIf="column.icon">
+            <vdl-icon fontSet="fontawesome" fontIcon="{{column.displayValue}}">
+            </vdl-icon>
+          </span>
+          <span *ngIf="!column.icon">{{column.displayValue}}</span>
+          <span class="resizeHandler"><span class="splitter"></span></span>
+        </th>
+
+        <td vdl-cell *vdlCellDef="let row" [width]="column.width">
+          <cell-renderer [cellTemplate]="cellTemplate" [column]="column" [row]="row"></cell-renderer>
+          <!--<div *ngIf="isMinimumSizeViewTable" class="minViewCol">
+            <div class="icon">
+              <p class="columnTextRow">{{row?.icon}}</p>
+            </div>
+            <div class="subject">
+              <p class="columnTextRow">{{row?.subject}}</p>
+              <p class="columnTextRow">{{row?.comments}}</p>
+            </div>
+            <div class="date">
+              <p class="columnTextRow">{{row?.date}}</p>
+            </div>
+          </div>
+          <vdl-icon svgIcon="core:check"></vdl-icon>
+          <vdl-icon svgIcon="core:line-chart"></vdl-icon>
+          <vdl-icon svgIcon="core:plane"></vdl-icon>
+          <vdl-icon svgIcon="core:android"></vdl-icon>
+          <vdl-icon svgIcon="core:undo"></vdl-icon>
+          <vdl-icon svgIcon="core:spinner"></vdl-icon>
+          <vdl-icon svgIcon="core:undo"></vdl-icon>
+          <span *ngIf="!isMinimumSizeViewTable">
+            {{row[column.field]}}
+          </span>-->
+        </td>
+      </ng-container>
+
+      <ng-container vdlColumnDef="groupHeader">
+        <td [colSpan]="displayedColumns.length" vdl-cell *vdlCellDef="let element" class="groupRow" (click)="toggleGroup(element)">
+          <vdl-icon *ngIf="element.isGroupExpanded">expand_less</vdl-icon>
+          <vdl-icon *ngIf="!element.isGroupExpanded">expand_more</vdl-icon>
+          <strong>{{getGroupName(element)}}</strong>
+        </td>
+      </ng-container>
+
+      <tr vdl-header-row *vdlHeaderRowDef="displayedColumns"></tr>
+      <tr vdl-row *vdlRowDef="let row; columns: displayedColumns;" class="vdl-row-override"></tr>
+      <tr vdl-row *vdlRowDef="let row; columns: ['groupHeader']; when: isGroup"> </tr>
+    </table>
+  </vdl-panel>
+  <vdl-panel [ngClass]="{'show': showPaginator, 'hide': !showPaginator}">
+      <vdl-paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"></vdl-paginator>
+  </vdl-panel>
+</div>

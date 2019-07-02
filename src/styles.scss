@@ -1,0 +1,62 @@
+@import '~vdl-angular/flexboxgrid/flexboxgrid.min.css';
+@import '~vdl-angular/prebuilt-themes/deeppurple-amber.css';
+@import '~vdl-angular/prebuilt-themes/vdl-global.css';
+
+body { 
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0px;
+  height: 100%;
+  background-color: #FFF;
+}
+
+.toggleGroupIcon {
+	font-weight: bold;
+	cursor: pointer;
+	width: 16px;
+  min-width: 16px;
+	height: 16px;
+	line-height: 16px;
+	text-align: center;
+	background: #333;
+	color: #fff;
+	margin-right: 10px;
+  display: inline-block;
+}
+
+.groupCell {
+	text-align: left;
+    justify-content: left;
+}
+.groupCell > span {
+	display: inline-flex;
+}
+.childCell {
+	text-align: left;
+    justify-content: left;
+}
+.childCell > span {
+	display: inline-flex;
+	padding-left: 35px;
+}
+
+.columnTextRow {
+  margin: 0;
+}
+
+//for height
+.vdl-expansion-panel-body{
+      max-height:none !important;
+           
+  }
+   .as-split-area:first-of-type{
+      overflow :hidden !important;
+      > div {
+          height : 100%;
+          .firstPane {
+            height : 100%;
+            .nested-filter-container{
+              overflow:auto;
+            }
+            }
+        }
+      }

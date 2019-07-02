@@ -1,0 +1,35 @@
+<vdl-tree
+  [dataSource]="nestedDataSource"
+  [treeControl]="nestedTreeControl"
+  class="review-filter-tree"
+>
+  <vdl-tree-node *vdlTreeNodeDef="let node" style="margin-left:15px;">
+    <li class="vdl-tree-node" (click)="selectItem(node)">
+      <div [class]="getLabelClasses(node)" vdlTreeNodeLabel>{{node.name}}</div>
+    </li>
+  </vdl-tree-node>
+
+  <vdl-nested-tree-node *vdlTreeNodeDef="let node; when: hasNestedChild" (click)="selectItem($event)">
+    <li (click)="selectItem(node)" style="list-style-type:none">
+      <div [class]="getLabelClasses(node)">
+        <button
+          vdl-icon-button class="rev-tree-btn"
+          vdlTreeNodeToggle *ngIf="node.children.length>0"
+          [attr.aria-label]="'toggle ' + node.item"
+          (click)="changeState(node)"
+        >
+          <vdl-icon
+            fontSet="fontawesome"
+            fontIcon="fa-angle-right"
+            class="vdl-icon-rtl-mirror">
+          </vdl-icon>
+        </button>
+        <vdl-icon *ngIf="node.icon" fontSet="fontawesome" fontIcon="{{node.icon}}"> </vdl-icon>
+        <div vdlTreeNodeLabel  vdlTooltipPosition="right">{{node.name}}</div>
+      </div>
+      <ul [class.review-tree-invisible]="!nestedTreeControl.isExpanded(node)" style="margin-left:17px;">
+        <ng-container vdlTreeNodeOutlet></ng-container>
+      </ul>
+    </li>
+  </vdl-nested-tree-node>
+</vdl-tree>

@@ -1,0 +1,79 @@
+<div class="mt10 ml10">
+  <button (click)="clearFilter()"  vdl-primary-button class="mini mb10 mr10"><vdl-icon fontSet="fontawesome" fontIcon="fa-times"></vdl-icon>Clear</button>
+  <button  (click)="applyFilter()"  vdl-primary-button class="mini mb10"><vdl-icon fontSet="fontawesome" fontIcon="fa-filter"></vdl-icon>Apply</button>
+
+</div>
+<vdl-accordion [multi]="multi">
+        <vdl-expansion-panel id="sidenav-dept-panel" #deptPanel (opened)="openClosePanels('deptPanel', true)" (closed)="openClosePanels('deptPanel', false)" [class]="getToggleItemClass('deptPanel')">
+        <vdl-expansion-panel-header style="background-color: #E8EEF4">
+          <vdl-panel-title>Department</vdl-panel-title>
+        </vdl-expansion-panel-header>
+          <div class="accordion-content">
+            <vdl-form-field [label]="'Mode'">
+                <vdl-select>
+                    <vdl-option *ngFor="let item of mockData" [value]="item.id">
+                        {{item.name}}
+                    </vdl-option>
+                </vdl-select>
+            </vdl-form-field>
+            <!-- <vdl-label>Dept:</vdl-label> cmnt by me--> 
+            <nested-dropdown
+              [data]="formattedDropdownData"
+              [label]="'Dept'"
+              [placeHolderText]="dropdownPlaceHolderText"
+              [selected]="dropdownSelected"
+              [spaceAround]="30"
+              [position]="'align'"
+              [groupSelactable]="true"
+              (onSelect)="onDropdownSelect($event)"
+            >
+            </nested-dropdown>
+            <vdl-form-field [label]="'Item'">
+                <vdl-select>
+                    <vdl-option *ngFor="let item of mockData" [value]="item.id">
+                        {{item.name}}
+                    </vdl-option>
+                </vdl-select>
+            </vdl-form-field>
+          </div>
+        </vdl-expansion-panel> 
+      <vdl-expansion-panel id="sidenav-filter-panel" #filterPanel (opened)="openClosePanels('filterPanel', true)" (closed)="openClosePanels('filterPanel', false)" [class]="getToggleItemClass('filterPanel')">
+        <vdl-expansion-panel-header style="background-color: #E8EEF4">
+            <vdl-panel-title>Filter </vdl-panel-title>
+        </vdl-expansion-panel-header>
+        <div class="accordion-content">
+        <vdl-form-field [label]="r">
+            <vdl-select>
+                <vdl-option *ngFor="let item of presetData" [value]="item.id" >{{item.name}}
+                </vdl-option>
+            </vdl-select>
+        </vdl-form-field>
+    <div class="nested-filter-container" [ngStyle]="{'height': openedaccordContenSpace}">
+      <vdl-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="review-filter-tree">
+        <vdl-tree-node *vdlTreeNodeDef="let node">
+          <li class="vdl-tree-node">
+            <button vdl-icon-button disabled></button>
+            <vdl-checkbox label="{{node.item}}" class="checklist-leaf-node"></vdl-checkbox>
+            <div vdlTreeNodeLabel>{{node.item}}</div>
+          </li>
+        </vdl-tree-node>
+        <vdl-nested-tree-node *vdlTreeNodeDef="let node; when: hasNestedChild" [ngClass]="{'vdl-tree-node-expanded' : node.expanded}">
+          <li>
+              <div class="vdl-tree-node">
+                  <button vdl-icon-button class="rev-tree-btn" vdlTreeNodeToggle *ngIf="node.children.length>0" [attr.aria-label]="'toggle ' + node.item" (click)="changeState(node)">
+                    <vdl-icon fontSet="fontawesome" fontIcon="fa-angle-right" class="vdl-icon-rtl-mirror"></vdl-icon>
+                  </button>
+                  <vdl-checkbox *ngIf="!node.children.length>0" label="" class="checklist-leaf-node"></vdl-checkbox>
+                  <vdl-icon fontSet="fontawesome" fontIcon="{{node.icon}}"> </vdl-icon>
+                  <div vdlTreeNodeLabel>{{node.item}}</div>
+              </div>
+            <ul [class.review-tree-invisible]="!nestedTreeControl.isExpanded(node)">
+              <ng-container vdlTreeNodeOutlet></ng-container>
+            </ul>
+          </li>
+        </vdl-nested-tree-node>
+      </vdl-tree>
+      </div>       
+        </div>
+    </vdl-expansion-panel>
+</vdl-accordion>
