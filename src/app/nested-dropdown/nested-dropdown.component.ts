@@ -130,7 +130,7 @@ export class NestedDropdown implements OnInit  {
   @Input() position: String = 'align';
   @Input() label?: String;
   @Input() groupSelactable: Boolean = false;
-  @Input() collapseOnClose: Boolean = false;
+  @Input() collapseOnClose: Boolean = true;
   @Output() onSelect = new EventEmitter();
   nestedData: Array<Object> = null;
   showDropdown: Boolean = false;
@@ -222,7 +222,10 @@ export class NestedDropdown implements OnInit  {
   showDropdownList(flag) {
     this.showDropdown = flag;
 
-    flag && this.positionDropdownList();
+    if(flag) {
+      this.nestedData = this.keepSelectedOpen(this.nestedData);
+      this.positionDropdownList();
+    }
 
     if(!flag && this.collapseOnClose) {
       this.nestedData = this.clearOpenedGroups(this.nestedData);
@@ -240,6 +243,35 @@ export class NestedDropdown implements OnInit  {
     }
   }
 
+  getOpenedPaths(selected) {
+    let paths = [];
+    let pString = '';
+    (selected && selected.path) && selected.path.split('').map((p, i) => {
+      pString = `${pString}${p}`;
+      (i !== 0) && paths.push(pString);
+    });
+    return paths;
+  }
+
+  isItemOpened(openedPaths, path) {
+    if(!openedPaths.length){
+      return false;
+    }
+    const itemIndex = openedPaths.indexOf(path);
+    return (itemIndex > -1 && (itemIndex+1 < openedPaths.length));
+  }
+
+  keepSelectedOpen(data) {
+    const openedPaths = this.getOpenedPaths(this.selected);
+    return data.map(item => {
+      if(item.children && item.children.length) {
+        return {...item, open: this.isItemOpened(openedPaths, item.path), children: this.keepSelectedOpen(item.children) }
+      } else {
+        return item;
+      }
+    });
+  }
+
   clearOpenedGroups(data) {
     return data.map(item => {
       if(item.children && item.children.length) {
@@ -247,7 +279,7 @@ export class NestedDropdown implements OnInit  {
       } else {
         return item;
       }
-    })
+    });
   }
 
   findAndReplace(path, data) {

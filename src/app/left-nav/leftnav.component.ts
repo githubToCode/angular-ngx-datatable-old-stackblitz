@@ -61,6 +61,33 @@ export class LeftNavComponent implements OnInit, AfterViewInit {
     },
     {
       name: 'Item dummy text 02'
+    },
+    {
+      name: 'Item dummy text 03',
+      children: [
+        {
+          name: 'Item dummy text 031',
+          children: [
+            {
+              name: 'Item dummy text 0311'
+            },
+            {
+              name: 'Item dummy text 0312',
+              children: [
+                {
+                  name: 'Item dummy text 03121'
+                },
+                {
+                  name: 'Item dummy text 03122'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          name: 'Item dummy text 032'
+        }
+      ]
     }
   ];
 
