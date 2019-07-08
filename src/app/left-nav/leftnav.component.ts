@@ -31,65 +31,66 @@ export class LeftNavComponent implements OnInit, AfterViewInit {
   dropdownSelected = null;
   leftNaveOpenedToggles = [];
   formattedDropdownData = [];
-  dropdownData = [
-    {
-      name: 'Item dummy text 01',
-      children: [
-        {
-          name: 'Item dummy text 001',
-          children: [
-            {
-              name: 'Item dummy text 0001'
-            },
-            {
-              name: 'Item dummy text 0002',
-              children: [
-                {
-                  name: 'Item dummy text 00021'
-                },
-                {
-                  name: 'Item dummy text 00022'
-                }
-              ]
-            }
-          ]
-        },
-        {
-          name: 'Item dummy text 002'
-        }
-      ]
-    },
-    {
-      name: 'Item dummy text 02'
-    },
-    {
-      name: 'Item dummy text 03',
-      children: [
-        {
-          name: 'Item dummy text 031',
-          children: [
-            {
-              name: 'Item dummy text 0311'
-            },
-            {
-              name: 'Item dummy text 0312',
-              children: [
-                {
-                  name: 'Item dummy text 03121'
-                },
-                {
-                  name: 'Item dummy text 03122'
-                }
-              ]
-            }
-          ]
-        },
-        {
-          name: 'Item dummy text 032'
-        }
-      ]
-    }
-  ];
+  dropdownData = [{
+        name: 'All Departments',
+        icon: "fa-building",
+        count :30,
+        children: [
+          {
+            name: 'Tagger1-D1',
+            count :10,
+            icon: "fa-briefcase",
+            children: [
+              {
+                name: 'Tagger1-1-D1',
+                count :5,
+                icon: "fa-briefcase",
+                children: [
+                  {
+                    name: 'Tagger1-3e-D1',
+                    count :5,
+                    icon: "fa-briefcase",
+                    children: [
+                      {
+                        name: 'Tagger1-5-D1',
+                        count :5,
+                        icon: "fa-briefcase",
+                      },
+                      {
+                        name: 'Tagger1-5-D1',
+                        count :5,
+                        icon: "fa-briefcase"
+
+                      }
+                    ]
+                  },
+                  {
+                    name: 'Tagger1-3e-D1',
+                    count :5,
+                    icon: "fa-briefcase"
+                  }
+                ]
+              },
+              {
+                name: 'Tagger1-2-D1',
+                count :5,
+                icon: "fa-briefcase"
+              }
+            ]
+          },
+          {
+            name: 'Tagger2-D1',
+            count :10,
+            icon: "fa-briefcase"
+          },
+          {
+            name: 'Tagger2-D3',
+            count :10,
+           icon: "fa-briefcase"
+
+          }
+        ]
+      }];
 
   //added for height cal
     filterPanelOpenedStatus = false;

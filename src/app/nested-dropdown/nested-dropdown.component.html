@@ -1,7 +1,14 @@
 <div *ngIf="showDropdown" class="nested-dropdown-trp-overlay"></div>
 <div class="nested-dropdown" (clickOutside)="onClickOutside($event)">
   <vdl-label class="label">{{label}}</vdl-label>
-  <span #cusInp tabindex="0" (keydown)="onNestedDropdownKeyDown($event)" (click)="onToggleDropdown($event)" class="selectedValue">{{getDisplayedValue()}} <span class="icon">
+  <span #cusInp tabindex="0" (keydown)="onNestedDropdownKeyDown($event)" (click)="onToggleDropdown($event)" class="selectedValue">
+    <!--{{getDisplayedValue()}} -->
+    <span class="selectedData" *ngIf="selected">
+        <vdl-icon  fontSet="fontawesome" fontIcon="{{selected.icon}}"> </vdl-icon>
+        <span *ngIf="selected" class="pr5">{{selected.name}}</span>
+        <span *ngIf="selected" class="countcol">({{selected.count}})</span>
+    </span>
+    <span class="icon">
       <vdl-icon fontSet="fontawesome" fontIcon="fa-angle-down" style="font-size: 1.25em;"></vdl-icon>
   </span>
   </span>

@@ -15,7 +15,8 @@ import * as _ from 'lodash';
             class="vdl-icon-rtl-mirror">
           </vdl-icon>
         </span>
-        {{child.name}}
+        
+        <vdl-icon *ngIf="child.icon" fontSet="fontawesome" fontIcon="{{child.icon}}" class="ml5"> </vdl-icon><span class="pr5">{{child.name}}</span><span class="pr5 countcol">({{child.count}})</span>
         <span class="bottomBorder"></span>
       </span>
       <nested-list *ngIf="child.open" [item]="child.children" [selected]="selected" (onToggleChildren)="toggleChildren($event)" (onSelectItem)="selectItem($event)"></nested-list>
