@@ -255,6 +255,9 @@ export class NestedDropdown implements OnInit  {
   }
 
   isItemOpened(openedPaths, path) {
+    if(path === '01') {
+      return true;
+    }
     if(!openedPaths.length){
       return false;
     }
