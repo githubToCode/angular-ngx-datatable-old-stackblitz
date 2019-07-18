@@ -149,6 +149,9 @@ export class NestedDropdown implements OnInit  {
       nly = (nlmRect && nlmRect.y) || nly;
       nlwidth = (nlmRect && nlmRect.width) || nlwidth;
       nlheight = (nlmRect && nlmRect.height) || nlheight; 
+      if(this.nestedListComponent.nestedListRef.nativeElement.querySelector('.active')) {
+        this.nestedListComponent.nestedListRef.nativeElement.querySelector('.active').focus();
+      }
     }
     const positionStyles = this.getPositionStyles(x, y, width, height, nlx, nly, nlwidth, nlheight);
     this.dropdownListStyles = {
@@ -228,7 +231,7 @@ export class NestedDropdown implements OnInit  {
       this.positionDropdownList();
     }
 
-    if(!flag && this.collapseOnClose) {
+    if(!flag && this.collapseOnClose && this.nestedData) {
       this.nestedData = this.clearOpenedGroups(this.nestedData);
     }
   }
@@ -277,6 +280,9 @@ export class NestedDropdown implements OnInit  {
   }
 
   clearOpenedGroups(data) {
+    if(!data) {
+      return null;
+    }
     return data.map(item => {
       if(item.children && item.children.length) {
         return {...item, open: false, children: this.clearOpenedGroups(item.children) }
