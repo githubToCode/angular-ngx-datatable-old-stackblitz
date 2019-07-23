@@ -313,7 +313,20 @@ export class NestedDropdown implements OnInit  {
       this.positionDropdownList();
     }, true);
   }
+ //added for the selected to have path
+formatedSelectedData(nestedData,selectedData) {
+    nestedData.map((d, i) => {
+      if (d.children && d.children.length) {
 
+        this.formatedSelectedData(d.children, selectedData);
+      }
+      else {
+        if(d.id== selectedData.id){
+          return d;
+        }
+      }
+    });
+  }
   //added by s
   inpFocus(ev){
     if(ev.type == 'focus'){
