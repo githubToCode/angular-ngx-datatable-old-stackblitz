@@ -105,7 +105,7 @@ export class NestedListComponent implements OnInit {
   }
 
   getLabelClasses(child, selected) {
-    return `label level-${child.level} ${(selected && selected.path === child.path) ? 'active' : ''}`;
+    return `label level-${child.level} ${(selected && selected.id === child.id) ? 'active' : ''}`;
   }
 
   getToggleSwitchClass(path) {
@@ -148,10 +148,7 @@ export class NestedDropdown implements OnInit  {
       nlx = (nlmRect && nlmRect.x) || nlx;
       nly = (nlmRect && nlmRect.y) || nly;
       nlwidth = (nlmRect && nlmRect.width) || nlwidth;
-      nlheight = (nlmRect && nlmRect.height) || nlheight; 
-      if(this.nestedListComponent.nestedListRef.nativeElement.querySelector('.active')) {
-        this.nestedListComponent.nestedListRef.nativeElement.querySelector('.active').focus();
-      }
+      nlheight = (nlmRect && nlmRect.height) || nlheight;
     }
     const positionStyles = this.getPositionStyles(x, y, width, height, nlx, nly, nlwidth, nlheight);
     this.dropdownListStyles = {
@@ -229,6 +226,12 @@ export class NestedDropdown implements OnInit  {
     if(flag) {
       this.nestedData = this.keepSelectedOpen(this.nestedData);
       this.positionDropdownList();
+      setTimeout(() => {
+        if(this.nestedListComponent.nestedListRef.nativeElement.querySelector('.active')) {
+          const topPos = this.nestedListComponent.nestedListRef.nativeElement.querySelector('.active').parentElement.offsetTop;
+          this.nestedListComponent.nestedListRef.nativeElement.scrollTop = topPos;
+        }
+      }, 50);
     }
 
     if(!flag && this.collapseOnClose && this.nestedData) {

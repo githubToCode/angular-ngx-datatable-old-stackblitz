@@ -28,66 +28,79 @@ export class LeftNavComponent implements OnInit, AfterViewInit {
   nestedDataSource: VdlTreeNestedDataSource<FileNode>;
   mockData =[{id:'1',name:'abc'},{id:'2',name:'def'}];
   dropdownPlaceHolderText = 'PlaceHolder...';
-  dropdownSelected = null;
+  dropdownSelected = {
+    name: 'Tagger1-5-D1',
+    count :5,
+    icon: "fa-briefcase",
+    id: 6
+  };
   leftNaveOpenedToggles = [];
   formattedDropdownData = [];
   dropdownData = [{
         name: 'All Departments',
         icon: "fa-building",
         count :30,
+        id: 1,
         children: [
           {
             name: 'Tagger1-D1',
             count :10,
             icon: "fa-briefcase",
+            id: 2,
             children: [
               {
                 name: 'Tagger1-1-D1',
                 count :5,
                 icon: "fa-briefcase",
+                id: 3,
                 children: [
                   {
                     name: 'Tagger1-3e-D1',
                     count :5,
                     icon: "fa-briefcase",
+                    id: 4,
                     children: [
                       {
                         name: 'Tagger1-5-D1',
                         count :5,
                         icon: "fa-briefcase",
+                        id: 5
                       },
                       {
                         name: 'Tagger1-5-D1',
                         count :5,
-                        icon: "fa-briefcase"
-
+                        icon: "fa-briefcase",
+                        id: 6
                       }
                     ]
                   },
                   {
                     name: 'Tagger1-3e-D1',
                     count :5,
-                    icon: "fa-briefcase"
+                    icon: "fa-briefcase",
+                    id: 7
                   }
                 ]
               },
               {
                 name: 'Tagger1-2-D1',
                 count :5,
-                icon: "fa-briefcase"
+                icon: "fa-briefcase",
+                id: 8
               }
             ]
           },
           {
             name: 'Tagger2-D1',
             count :10,
-            icon: "fa-briefcase"
+            icon: "fa-briefcase",
+            id: 9
           },
           {
             name: 'Tagger2-D3',
             count :10,
-           icon: "fa-briefcase"
-
+            icon: "fa-briefcase",
+            id: 10
           }
         ]
       }];
@@ -113,21 +126,29 @@ export class LeftNavComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
      this.nestedDataSource.data = this.mockDatabuild();
-     this.formattedDropdownData = this.formatedDropdownData(this.dropdownData, 0, '0');
+     this.formattedDropdownData = this.formatDropdownData(this.dropdownData, 0, '0', this.dropdownSelected);
   }
 
   ngAfterViewInit() {
     
   }
 
-  formatedDropdownData(data, level, path) {
+  formatDropdownData(data, level, path) {
     const l = level || 0;
     const p = path || '0';
     return data.map((d, i) => {
       if (d.children && d.children.length) {
-        return {...d, level: l, path: `${path}${i+1}`, children: this.formatedDropdownData(d.children, 1+l, `${path}${i+1}`)};
+        const formattedItem = {...d, level: l, path: `${path}${i+1}`};
+        if( this.dropdownSelected && formattedItem.id == this.dropdownSelected.id) {
+          this.dropdownSelected = formattedItem;
+        }
+        return {...formattedItem, children: this.formatDropdownData(d.children, 1+l, `${path}${i+1}`)};
       } else {
-        return {...d, level: l, path: `${path}${i+1}`};
+        const formattedItem = {...d, level: l, path: `${path}${i+1}`};
+        if( this.dropdownSelected && formattedItem.id == this.dropdownSelected.id) {
+          this.dropdownSelected = formattedItem;
+        }
+        return formattedItem;
       }
     })
   }
